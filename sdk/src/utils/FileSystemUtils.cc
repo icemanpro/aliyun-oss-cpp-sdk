@@ -209,7 +209,7 @@ std::shared_ptr<std::fstream> AlibabaCloud::OSS::GetFstreamByPath(
     const std::string& path, const std::wstring& pathw,
     std::ios_base::openmode mode)
 {
-#ifdef _WIN32
+#if defined (_WIN32) && defined (_MSC_VER)
     if (!pathw.empty()) {
         return std::make_shared<std::fstream>(pathw, mode);
     }

@@ -91,8 +91,7 @@ void ResumableBaseWorker::removeRecordFile()
 #endif
 }
 
-#ifdef _WIN32
-
+#if defined (_WIN32) && defined (_MSC_VER)
 std::string ResumableBaseWorker::toString(const std::wstring& str)
 {
     std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;

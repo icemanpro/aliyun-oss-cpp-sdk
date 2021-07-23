@@ -540,7 +540,11 @@ std::time_t AlibabaCloud::OSS::UtcToUnixTime(const std::string &t)
         tm.tm_year = tm.tm_year - 1900;
         tm.tm_mon = tm.tm_mon - 1;
 #ifdef _WIN32
-        tt = _mkgmtime64(&tm);
+        #if __MSVCRT_VERSION__ < 0x1400
+         tt = _mkgmtime(&tm);
+       #else
+         tt = _mkgmtime64(&tm);
+       #endif
 #else
         tt = timegm(&tm);
 #endif // _WIN32
